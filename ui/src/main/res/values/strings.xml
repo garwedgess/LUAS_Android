@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LUAS</string>
+
+    <string name="time_unit_min">min</string>
+    <string name="time_unit_mins">mins</string>
+    <string name="time_unit_now">now</string>
+
+    <string name="menu_title_refresh_forecast">Refresh Forecast</string>
+
+    <string name="station_name_stillorgan">Stillorgan</string>
+    <string name="station_name_marlborough">Marlborough</string>
+    <string name="btn_retry">Retry</string>
+</resources>

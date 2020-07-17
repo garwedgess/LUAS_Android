@@ -1,0 +1,2 @@
+include ':ui', ':data', ':domain', ':presentation', ':mock'
+rootProject.name = "LUAS"

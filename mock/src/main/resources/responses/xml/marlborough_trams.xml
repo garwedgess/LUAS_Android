@@ -1,0 +1,12 @@
+<stopInfo created="2020-07-17T17:25:16" stop="Marlborough" stopAbv="MAR">
+	<message>Green Line services operating normally</message>
+	<direction name="Inbound">
+		<tram destination="No Northbound Service" dueMins="" />
+	</direction>
+	<direction name="Outbound">
+		<tram dueMins="2" destination="Bride's Glen" />
+		<tram dueMins="4" destination="Sandyford" />
+		<tram dueMins="9" destination="Bride's Glen" />
+		<tram dueMins="17" destination="Bride's Glen" />
+	</direction>
+</stopInfo>

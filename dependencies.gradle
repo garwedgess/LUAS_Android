@@ -1,0 +1,170 @@
+ext {// Android
+    minSdkVersion = 21
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    appId = "eu.wedgess.luas"
+    appVersion = "1.0"
+    versionCode = 1
+
+
+    // Versions
+    kotlin_version = '1.3.72'
+    dagger_version = '2.25.4'
+    arch_livedata_version = '2.2.0'
+    timber_version = '4.7.1'
+    retrofit_version = '2.8.1'
+    okhttp_version = '4.4.0'
+    espresso_version = '3.2.0'
+
+
+    // kotlin
+    kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    kotlinCoroutines = 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
+    kotlinCoroutinesTest = 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7'
+    viewModelScope = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01"
+
+    // debug
+    timber = "com.jakewharton.timber:timber:$timber_version"
+    javaX = 'javax.inject:javax.inject:1'
+
+    // architecture components
+    liveData = "android.arch.lifecycle:extensions:$arch_livedata_version"
+    liveDataCompiler = "android.arch.lifecycle:compiler:$arch_livedata_version"
+
+    // dagger
+    daggerCompiler = "com.google.dagger:dagger-compiler:$dagger_version"
+    daggerProcessor = "com.google.dagger:dagger-android-processor:$dagger_version"
+    dagger = "com.google.dagger:dagger:$dagger_version"
+    daggerAndroid = "com.google.dagger:dagger-android:$dagger_version"
+    daggerAndroidSupport = "com.google.dagger:dagger-android-support:$dagger_version"
+
+    appcompat = 'androidx.appcompat:appcompat:1.1.0'
+    materialComponents = 'com.google.android.material:material:1.3.0-alpha01'
+    androidCoreKotlin = 'androidx.core:core-ktx:1.3.0'
+    constraintLayout = 'androidx.constraintlayout:constraintlayout:1.1.3'
+    swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // RETROFIT
+    retrofit = "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    retrofitTikXmlConverter = "com.tickaroo.tikxml:retrofit-converter:0.8.13"
+
+    // OKHTTP
+    okhttp = "com.squareup.okhttp3:okhttp:${okhttp_version}"
+    okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${okhttp_version}"
+
+    tikXMLAnnotations = 'com.tickaroo.tikxml:annotation:0.8.13'
+    tikXMLAnnotationProcessor = 'com.tickaroo.tikxml:processor:0.8.13'
+    tikXMLCore = 'com.tickaroo.tikxml:core:0.8.13'
+
+    // Test
+    junit = 'junit:junit:4.13'
+
+    mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    mockWebServer = "com.squareup.okhttp3:mockwebserver:${okhttp_version}"
+    archCoreTesting = "android.arch.core:core-testing:2.2.0"
+
+
+    // ------------------- module specific dependencies ---------------------- //
+
+    // data
+    dataDependencies = [
+            kotlinStdLib,
+            kotlinCoroutines,
+            tikXMLCore,
+            tikXMLAnnotations,
+            timber,
+            retrofit,
+            javaX
+    ]
+
+
+    dataDependenciesKapt = [
+            tikXMLAnnotationProcessor
+    ]
+
+    dataTestDependencies = [
+            junit,
+            mockWebServer,
+            mockitoKotlin,
+            kotlinCoroutinesTest
+    ]
+
+    // domain
+
+    domainDependencies = [
+            kotlinStdLib,
+            kotlinCoroutines,
+            javaX,
+            timber
+    ]
+
+    domainTestDependencies = [
+            junit,
+            mockitoKotlin,
+            kotlinCoroutinesTest
+    ]
+
+
+    // presentation
+    presentationDependencies = [
+            kotlinStdLib,
+            kotlinCoroutines,
+            liveData,
+            javaX,
+            viewModelScope,
+            timber
+    ]
+
+    presentationTestDependencies = [
+            junit,
+            archCoreTesting,
+            mockitoKotlin,
+            kotlinCoroutinesTest
+    ]
+
+    presentationDependenciesKapt = [
+            liveDataCompiler
+    ]
+
+
+    // UI
+    uiDependencies = [
+            kotlinStdLib,
+            kotlinCoroutines,
+            appcompat,
+            androidCoreKotlin,
+            constraintLayout,
+            liveData,
+            dagger,
+            daggerAndroid,
+            daggerAndroidSupport,
+            timber,
+            okhttp,
+            okhttpLogging,
+            retrofit,
+            retrofitTikXmlConverter,
+            materialComponents,
+            swipeRefreshLayout
+    ]
+
+    uiDependenciesKapt = [
+            liveDataCompiler,
+            daggerCompiler,
+            daggerProcessor
+    ]
+
+    uiTestDependencies = [
+            junit
+    ]
+
+    // Mock
+    mockDependencies = [
+            kotlinStdLib,
+            okhttp,
+            okhttpLogging,
+            retrofit,
+            retrofitTikXmlConverter,
+            tikXMLCore,
+            mockWebServer
+    ]
+}
