@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -13,8 +14,8 @@ import dagger.android.support.DaggerAppCompatActivity
 import eu.wedgess.luas.R
 import eu.wedgess.luas.domain.model.StopInformationEntity
 import eu.wedgess.luas.presentation.model.Resource
-import eu.wedgess.luas.presentation.model.StationsEnum
 import eu.wedgess.luas.presentation.model.Status
+import eu.wedgess.luas.presentation.model.Stops
 import eu.wedgess.luas.presentation.viewmodels.TramForecastViewModel
 import kotlinx.android.synthetic.main.activity_tram_forecast.*
 import timber.log.Timber
@@ -34,21 +35,29 @@ class TramForecastActivity : DaggerAppCompatActivity() {
         adapter = TramForecastAdapter()
         forecastActivityRV.adapter = adapter
 
+        // remove initial layout animations for config changes etc.
+        if (savedInstanceState != null) {
+            forecastActivityRV.layoutAnimation = null
+        }
+
         viewModel = ViewModelProviders.of(this@TramForecastActivity, factory)
             .get(TramForecastViewModel::class.java)
 
         forecastActivityRetryBTN.setOnClickListener {
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
         }
-        observeForecastData()
+        forecastActivitySwipeRefresh.setColorSchemeColors(
+            ContextCompat.getColor(this@TramForecastActivity, R.color.colorAccent),
+            ContextCompat.getColor(this@TramForecastActivity, R.color.colorPrimaryLight)
+        )
+        observeStopForecastData()
         observeStopNameData()
-        viewModel.getTramsForecast()
     }
 
     override fun onResume() {
         super.onResume()
         if (::viewModel.isInitialized) {
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
         }
     }
 
@@ -60,13 +69,13 @@ class TramForecastActivity : DaggerAppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.refresh_forecast) {
             setSwipeRefreshLoadingState(isLoading = true)
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun observeForecastData() {
+    private fun observeStopForecastData() {
         if (!viewModel.getStopForecastResult().hasActiveObservers()) {
             viewModel.getStopForecastResult()
                 .observe(this@TramForecastActivity, Observer { stopInfo ->
@@ -81,13 +90,14 @@ class TramForecastActivity : DaggerAppCompatActivity() {
             Status.SUCCESS -> {
                 setSwipeRefreshLoadingState(isLoading = false)
                 stopInfoResult.data?.let { stopInfo ->
-                    supportActionBar?.subtitle = stopInfo.requestTime
+                    supportActionBar?.subtitle = stopInfo.time
+                    setStopStatusMessage(stopInfo.message)
                     val trams = when (viewModel.getStopNameResult().value) {
-                        StationsEnum.STILLORGAN -> {
+                        Stops.STILLORGAN -> {
                             stopInfo.inboundTrams
                         }
                         else -> {
-                            // StationsEnum.MARLBOROUGH
+                            // Stops.MARLBOROUGH
                             stopInfo.outboundTrams
                         }
                     }
@@ -106,12 +116,30 @@ class TramForecastActivity : DaggerAppCompatActivity() {
         }
     }
 
+    private fun setStopStatusMessage(message: String) {
+        val operationStatusColorResId =
+            if (message.contains(getString(R.string.normal_operation_status))) {
+                R.color.operation_status_normal
+            } else {
+                R.color.operation_status_other
+            }
+        forecastActivityStopMessageTV.text = message
+        forecastActivityStopMessageTV.setBackgroundColor(
+            ContextCompat.getColor(
+                this@TramForecastActivity,
+                operationStatusColorResId
+            )
+        )
+    }
+
     private fun toggleRecyclerViewVisibility(visible: Boolean) {
         if (visible) {
+            forecastActivityStopMessageTV.visibility = View.VISIBLE
             forecastActivityRV.visibility = View.VISIBLE
             forecastActivityNoDataTV.visibility = View.GONE
             forecastActivityRetryBTN.visibility = View.GONE
         } else {
+            forecastActivityStopMessageTV.visibility = View.GONE
             forecastActivityRV.visibility = View.GONE
             forecastActivityNoDataTV.visibility = View.VISIBLE
             forecastActivityRetryBTN.visibility = View.VISIBLE
@@ -123,10 +151,10 @@ class TramForecastActivity : DaggerAppCompatActivity() {
             viewModel.getStopNameResult().observe(this@TramForecastActivity, Observer { stopName ->
                 Timber.i("Received stop name: ${stopName.name}")
                 val name = when (stopName) {
-                    StationsEnum.STILLORGAN -> {
+                    Stops.STILLORGAN -> {
                         getString(R.string.station_name_stillorgan)
                     }
-                    StationsEnum.MARLBOROUGH -> {
+                    Stops.MARLBOROUGH -> {
                         getString(R.string.station_name_marlborough)
                     }
                 }

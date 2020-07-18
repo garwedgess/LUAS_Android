@@ -38,7 +38,7 @@ class LuasForecastRepositoryImplTest {
     fun `calling getStillorganForecast returns correct stopName`() {
         mockServer.enqueue(TramForecastMockResponses.getSuccessfulStillorganForecastsResponse())
         runBlocking {
-            assert(luasForecastRepositoryImpl.getStillorganForecast().stopName == "Stillorgan")
+            assert(luasForecastRepositoryImpl.getStillorganForecast().name == "Stillorgan")
         }
     }
 
@@ -46,7 +46,7 @@ class LuasForecastRepositoryImplTest {
     fun `calling getMarlboroughForecast returns correct stopName`() {
         mockServer.enqueue(TramForecastMockResponses.getSuccessfulMarlboroughForecastsResponse())
         runBlocking {
-            assert(luasForecastRepositoryImpl.getMarlboroughForecast().stopName == "Marlborough")
+            assert(luasForecastRepositoryImpl.getMarlboroughForecast().name == "Marlborough")
         }
     }
 }

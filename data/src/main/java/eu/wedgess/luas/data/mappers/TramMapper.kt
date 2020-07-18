@@ -11,14 +11,14 @@ class TramMapper : Mapper<TramEntity, TramData> {
 
     override fun mapFromEntity(entity: TramEntity): TramData {
         return TramData(
-            dueMins = entity.dueMins,
+            dueMins = entity.due,
             destination = entity.destination
         )
     }
 
     override fun mapToEntity(data: TramData): TramEntity {
         return TramEntity(
-            dueMins = data.dueMins,
+            due = data.dueMins,
             destination = data.destination
         )
     }

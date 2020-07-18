@@ -30,7 +30,7 @@ class TramMapperTest {
     @Test
     fun `mapsFrom dueMins`() {
         val result = mapper.mapFromEntity(entity)
-        assertEquals(entity.dueMins, result.dueMins)
+        assertEquals(entity.due, result.dueMins)
     }
 
 
@@ -43,6 +43,6 @@ class TramMapperTest {
     @Test
     fun `mapsTo dueMins`() {
         val result = mapper.mapToEntity(data)
-        assertEquals(data.dueMins, result.dueMins)
+        assertEquals(data.dueMins, result.due)
     }
 }

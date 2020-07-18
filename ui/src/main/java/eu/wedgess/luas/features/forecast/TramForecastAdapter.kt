@@ -27,18 +27,18 @@ class TramForecastAdapter :
         fun bindTramEntity(tramEntity: TramEntity) {
             with(tramEntity) {
                 itemView.rowTramDestinationTV.text = destination
-                itemView.rowTramDueAtTV.text = dueMins
+                itemView.rowTramDueAtTV.text = due
                 when {
-                    dueMins == "DUE" -> {
+                    due == "DUE" -> {
                         itemView.rowTramDueAtValTV.text = itemView.context.getString(
                             R.string.time_unit_now
                         )
                     }
-                    dueMins.isBlank() -> {
+                    due.isBlank() -> {
                         itemView.rowTramDueAtTV.visibility = View.GONE
                         itemView.rowTramDueAtValTV.visibility = View.GONE
                     }
-                    dueMins.toIntOrNull() == 1 -> {
+                    due.toIntOrNull() == 1 -> {
                         itemView.rowTramDueAtValTV.text = itemView.context.getString(
                             R.string.time_unit_min
                         )

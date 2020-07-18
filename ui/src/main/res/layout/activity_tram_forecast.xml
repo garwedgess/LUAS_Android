@@ -25,8 +25,8 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_retry"
                 android:layout_marginTop="16dp"
+                android:text="@string/btn_retry"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,11 +37,11 @@
                 android:id="@+id/forecastActivityNoDataTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:gravity="center_horizontal"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:gravity="center_horizontal"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,18 +49,36 @@
                 tools:text="No Data"
                 tools:visibility="visible" />
 
+            <TextView
+                android:id="@+id/forecastActivityStopMessageTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingStart="@dimen/forecast_stop_status_padding_start_end"
+                android:paddingTop="@dimen/forecast_stop_status_padding_top_bottom"
+                android:paddingEnd="@dimen/forecast_stop_status_padding_start_end"
+                android:paddingBottom="@dimen/forecast_stop_status_padding_top_bottom"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/forecast_stop_status_text_size"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Stop Info message"
+                tools:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/forecastActivityRV"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="@dimen/forecast_trams_recycler_margin_top"
                 android:layoutAnimation="@anim/recycler_layout_animation"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forecastActivityStopMessageTV"
                 tools:visibility="gone" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

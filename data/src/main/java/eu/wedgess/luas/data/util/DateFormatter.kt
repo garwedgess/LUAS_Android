@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 val uiDateFormatter = object : ThreadLocal<DateFormat>() {
     @SuppressLint("SimpleDateFormat")
     override fun initialValue(): DateFormat? {
-        return SimpleDateFormat("EEEE dd MMM yyyy   HH:mm:ss")
+        return SimpleDateFormat("HH:mm:ss  -  EEEE dd MMM yyyy")
     }
 }
 

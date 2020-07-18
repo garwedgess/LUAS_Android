@@ -1,6 +1,6 @@
 package eu.wedgess.luas.presentation.model
 
-enum class StationsEnum {
+enum class Stops {
     STILLORGAN,
     MARLBOROUGH
 }

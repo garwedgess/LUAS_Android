@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
+    android:layout_marginStart="@dimen/tram_row_margin_start_end"
+    android:layout_marginEnd="@dimen/tram_row_margin_start_end"
+    app:cardElevation="@dimen/tram_row_card_elevation"
     app:cardUseCompatPadding="true"
-    app:cardElevation="2dp"
-    app:contentPadding="8dp">
+    app:contentPadding="@dimen/tram_row_card_padding">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

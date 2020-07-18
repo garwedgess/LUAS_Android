@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tram_row_margin_start_end">4dp</dimen>
+    <dimen name="tram_row_card_padding">8dp</dimen>
+    <dimen name="tram_row_card_elevation">2dp</dimen>
+
+    <dimen name="forecast_stop_status_padding_top_bottom">4dp</dimen>
+    <dimen name="forecast_stop_status_padding_start_end">16dp</dimen>
+    <dimen name="forecast_stop_status_text_size">16sp</dimen>
+    <dimen name="forecast_trams_recycler_margin_top">4dp</dimen>
+</resources>

@@ -21,9 +21,9 @@ class StopInformationMapper @Inject constructor(
     override fun mapFromEntity(entity: StopInformationEntity): StopInformationData {
         return StopInformationData(
             message = entity.message,
-            stop = entity.stopName,
-            created = requireNotNull(uiDateFormatter.get()?.parse(entity.requestTime)),
-            stopCode = entity.stopCode,
+            name = entity.name,
+            requestTime = requireNotNull(uiDateFormatter.get()?.parse(entity.time)),
+            code = entity.code,
             directions = listOf(
                 DirectionData(
                     INBOUND,
@@ -36,19 +36,19 @@ class StopInformationMapper @Inject constructor(
     override fun mapToEntity(data: StopInformationData): StopInformationEntity {
         return StopInformationEntity(
             message = data.message,
-            stopName = data.stop,
-            requestTime = requireNotNull(uiDateFormatter.get()).format(data.created),
-            stopCode = data.stopCode,
-            inboundTrams = requireNotNull(data.directions.find { it.type == INBOUND }?.trams?.map {
+            name = data.name,
+            time = requireNotNull(uiDateFormatter.get()).format(data.requestTime),
+            code = data.code,
+            inboundTrams = data.directions.first { it.name == INBOUND }.trams.map {
                 tramMapper.mapToEntity(
                     it
                 )
-            }),
-            outboundTrams = requireNotNull(data.directions.find { it.type == OUTBOUND }?.trams?.map {
+            },
+            outboundTrams = data.directions.first { it.name == OUTBOUND }.trams.map {
                 tramMapper.mapToEntity(
                     it
                 )
-            })
+            }
         )
     }
 

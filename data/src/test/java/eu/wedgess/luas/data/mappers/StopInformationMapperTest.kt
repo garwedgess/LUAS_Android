@@ -23,15 +23,15 @@ class StopInformationMapperTest {
     }
 
     @Test
-    fun `mapsFrom stopName`() {
+    fun `mapsFrom name`() {
         val result = mapper.mapFromEntity(entity)
-        assertEquals(entity.stopName, result.stop)
+        assertEquals(entity.name, result.name)
     }
 
     @Test
-    fun `mapsFrom stopCode`() {
+    fun `mapsFrom code`() {
         val result = mapper.mapFromEntity(entity)
-        assertEquals(entity.stopCode, result.stopCode)
+        assertEquals(entity.code, result.code)
     }
 
     @Test
@@ -43,7 +43,7 @@ class StopInformationMapperTest {
     @Test
     fun `mapsFrom requestTime`() {
         val result = mapper.mapFromEntity(entity)
-        assertEquals(entity.requestTime, uiDateFormatter.get()?.format(result.created))
+        assertEquals(entity.time, uiDateFormatter.get()?.format(result.requestTime))
     }
 
     @Test
@@ -51,7 +51,7 @@ class StopInformationMapperTest {
         val result = mapper.mapFromEntity(entity)
         assertEquals(
             entity.outboundTrams.size,
-            result.directions.first { it.type == "Outbound" }.trams.size
+            result.directions.first { it.name == "Outbound" }.trams.size
         )
     }
 
@@ -60,21 +60,21 @@ class StopInformationMapperTest {
         val result = mapper.mapFromEntity(entity)
         assertEquals(
             entity.inboundTrams.size,
-            result.directions.first { it.type == "Inbound" }.trams.size
+            result.directions.first { it.name == "Inbound" }.trams.size
         )
     }
 
 
     @Test
-    fun `mapsTo stop`() {
+    fun `mapsTo name`() {
         val result = mapper.mapToEntity(data)
-        assertEquals(data.stop, result.stopName)
+        assertEquals(data.name, result.name)
     }
 
     @Test
-    fun `mapsTo stopCode`() {
+    fun `mapsTo code`() {
         val result = mapper.mapToEntity(data)
-        assertEquals(data.stopCode, result.stopCode)
+        assertEquals(data.code, result.code)
     }
 
     @Test
@@ -84,16 +84,16 @@ class StopInformationMapperTest {
     }
 
     @Test
-    fun `mapsTo created`() {
+    fun `mapsTo requestTime`() {
         val result = mapper.mapToEntity(data)
-        assertEquals(data.created, uiDateFormatter.get()?.parse(result.requestTime))
+        assertEquals(data.requestTime, uiDateFormatter.get()?.parse(result.time))
     }
 
     @Test
     fun `mapsTo outboundTrams (size)`() {
         val result = mapper.mapToEntity(data)
         assertEquals(
-            data.directions.first { it.type == "Outbound" }.trams.size,
+            data.directions.first { it.name == "Outbound" }.trams.size,
             result.outboundTrams.size
         )
     }
@@ -102,7 +102,7 @@ class StopInformationMapperTest {
     fun `mapsTo inboundTrams (size)`() {
         val result = mapper.mapToEntity(data)
         assertEquals(
-            data.directions.first { it.type == "Inbound" }.trams.size,
+            data.directions.first { it.name == "Inbound" }.trams.size,
             result.inboundTrams.size
         )
     }

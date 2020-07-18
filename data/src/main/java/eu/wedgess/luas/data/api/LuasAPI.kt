@@ -13,7 +13,7 @@ interface LuasAPI {
     @GET("get.ashx")
     suspend fun fetchTramForecast(
         @Query("action") action: String = "forecast",
-        @Query("stop") stop: String,
+        @Query("stop") stopCode: String,
         @Query("encrypt") encrypt: Boolean = false
     ): StopInformationData
 

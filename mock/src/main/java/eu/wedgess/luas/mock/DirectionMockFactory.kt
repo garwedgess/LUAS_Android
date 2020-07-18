@@ -3,7 +3,7 @@ package eu.wedgess.luas.mock
 import eu.wedgess.luas.data.model.DirectionData
 import eu.wedgess.luas.data.model.TramData
 
-fun getMarlboroughDirectionData(): List<DirectionData> {
+fun getMockMarlboroughDirectionData(): List<DirectionData> {
     return listOf(
         DirectionData("Outbound", getMockTramData(3)),
         DirectionData(
@@ -13,7 +13,7 @@ fun getMarlboroughDirectionData(): List<DirectionData> {
     )
 }
 
-fun getStillorganDirectionData(): List<DirectionData> {
+fun getMockStillorganDirectionData(): List<DirectionData> {
     return listOf(
         DirectionData("Outbound", getMockTramData(3)),
         DirectionData(

@@ -12,11 +12,11 @@ class LuasForecastRepositoryImpl @Inject constructor(
 ) : LuasForecastRepository {
 
     override suspend fun getStillorganForecast(): StopInformationEntity {
-        return stopInformationMapper.mapToEntity(luasAPI.fetchTramForecast(stop = "sti"))
+        return stopInformationMapper.mapToEntity(luasAPI.fetchTramForecast(stopCode = "sti"))
     }
 
     override suspend fun getMarlboroughForecast(): StopInformationEntity {
-        return stopInformationMapper.mapToEntity(luasAPI.fetchTramForecast(stop = "mar"))
+        return stopInformationMapper.mapToEntity(luasAPI.fetchTramForecast(stopCode = "mar"))
     }
 
 }

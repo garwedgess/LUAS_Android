@@ -66,7 +66,7 @@ class TramForecastViewModelTest {
     }
 
     @Test
-    fun `when getTramForecast is executed at 12 01 getStillorganForecastUseCase is executed`() {
+    fun `when getStopForecast is executed at 12 01 getStillorganForecastUseCase is executed`() {
         coroutineRule.testDispatcher.runBlockingTest {
             // Given
             whenever(timeChecker.getHourAndMinutesOfDay()).thenReturn(
@@ -76,14 +76,14 @@ class TramForecastViewModelTest {
                 )
             )
             // When
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
             // Then
             verify(getStillorganForecastUseCase, times(1)).execute()
         }
     }
 
     @Test
-    fun `when getTramForecast is executed at 23 59 getStillorganForecastUseCase is executed`() {
+    fun `when getStopForecast is executed at 23 59 getStillorganForecastUseCase is executed`() {
         coroutineRule.testDispatcher.runBlockingTest {
             // Given
             whenever(timeChecker.getHourAndMinutesOfDay()).thenReturn(
@@ -93,14 +93,14 @@ class TramForecastViewModelTest {
                 )
             )
             // When
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
             // Then
             verify(getStillorganForecastUseCase, times(1)).execute()
         }
     }
 
     @Test
-    fun `when getTramForecast is executed at 00 00 getMarlboroughForecastUseCase is executed`() {
+    fun `when getStopForecast is executed at 00 00 getMarlboroughForecastUseCase is executed`() {
         coroutineRule.testDispatcher.runBlockingTest {
             // Given
             whenever(timeChecker.getHourAndMinutesOfDay()).thenReturn(
@@ -110,14 +110,14 @@ class TramForecastViewModelTest {
                 )
             )
             // When
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
             // Then
             verify(getMarlboroughForecastUseCase, times(1)).execute()
         }
     }
 
     @Test
-    fun `when getTramForecast is executed at 12 00 getMarlboroughForecastUseCase is executed`() {
+    fun `when getStopForecast is executed at 12 00 getMarlboroughForecastUseCase is executed`() {
         coroutineRule.testDispatcher.runBlockingTest {
             // Given
             whenever(timeChecker.getHourAndMinutesOfDay()).thenReturn(
@@ -127,7 +127,7 @@ class TramForecastViewModelTest {
                 )
             )
             // When
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
             // Then
             verify(getMarlboroughForecastUseCase, times(1)).execute()
         }
@@ -135,7 +135,7 @@ class TramForecastViewModelTest {
 
 
     @Test
-    fun `when getTramForecast is executed at 2 22 assert marlborough data is correct`() {
+    fun `when getStopForecast is executed at 2 22 assert marlborough data is correct`() {
         coroutineRule.testDispatcher.runBlockingTest {
             // Given
             val expectedData = getMockMarlboroughStopInformationEntity()
@@ -147,14 +147,14 @@ class TramForecastViewModelTest {
             )
             whenever(getMarlboroughForecastUseCase.execute()).thenReturn(expectedData)
             // When
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
             // Then
             assert(viewModel.getStopForecastResult().value == Resource.success(expectedData))
         }
     }
 
     @Test
-    fun `when getTramForecast is executed at 20 30 gassert stillorgan data is correct`() {
+    fun `when getStopForecast is executed at 20 30 assert stillorgan data is correct`() {
         coroutineRule.testDispatcher.runBlockingTest {
             // Given
             val expectedData = getMockStillorganStopInformationEntity()
@@ -166,7 +166,7 @@ class TramForecastViewModelTest {
             )
             whenever(getStillorganForecastUseCase.execute()).thenReturn(expectedData)
             // When
-            viewModel.getTramsForecast()
+            viewModel.getStopForecast()
             // Then
             assert(viewModel.getStopForecastResult().value == Resource.success(expectedData))
         }
